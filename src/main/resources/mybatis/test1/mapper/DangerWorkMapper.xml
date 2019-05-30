@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.springbootmybatis.dao.test1.DangerWorkMapper" >
+
+    <!--这些字段用于查询返回的，selectDangerWorkBycondition，getDangerWorkById在使用-->
+    <sql id="DangerWork_Column_List">
+      xmes_safe_dangerous.id,dangerous_code ,dangerous_name,dangerous_level,dangerous_dept_id,
+      name as dangerousDeptName,dangerous_user_name,
+      dangerous_location,imgs,dangerous_time,commit_user_name,description
+    </sql>
+
+    <select id="getDangerWorkById" resultType="com.demo.springbootmybatis.entity.DangerWork" parameterType="int">
+      select <include refid="DangerWork_Column_List"/> from xmes_safe_dangerous left join xmes_dept_info
+        on xmes_dept_info.id = dangerous_dept_id where xmes_safe_dangerous.id = #{id}
+    </select>
+</mapper>
